@@ -1,11 +1,14 @@
 ﻿
 using System;
+using Authentication;
 
 namespace Core
 {
-    public interface IAppConfig
+    public class AppConfig
     {
-        string DBConnectionString { get; set; }
+        public string DBConnectionString { get; set; }
+        public string UserTableName { get; set; }
+        public string CoreTableName { get; set; }
     }
 
     interface IApp
@@ -14,11 +17,15 @@ namespace Core
 
     public class App : IApp
     {
-        private string DBConnectionString { get; set; }
+        private AuthenticationManager AuthManager { get; set; }
 
-        public App(IAppConfig config)
+        public App(AppConfig config)
         {
-            DBConnectionString = config.DBConnectionString;
+            AuthManager = new AuthenticationManager(new AuthenticationManagerConfig()
+            {
+                ConnectionString = config.DBConnectionString,
+                DatabaseName = config.UserTableName
+            });
         }
     }
 }

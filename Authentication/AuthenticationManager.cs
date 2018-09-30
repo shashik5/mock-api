@@ -7,25 +7,25 @@ using System.Text;
 
 namespace Authentication
 {
-    interface IAuthenticationManager
+    public interface IAuthenticationManager
     {
         User GetUserDetails(string authCode);
         bool Validate(string authCode);
     }
 
-    interface IAuthenticationManagerConfig
+    public class AuthenticationManagerConfig
     {
-        string ConnectionString { get; set; }
-        string DatabaseName { get; set; }
+        public string ConnectionString { get; set; }
+        public string DatabaseName { get; set; }
     }
 
-    internal class AuthenticationManager : IAuthenticationManager
+    public class AuthenticationManager : IAuthenticationManager
     {
         private uint AuthCodeDbEncryptionLevel = 5;
         private uint UserAuthCodeEncryptionLevel = 3;
         private IMongoCollection<User> UserCollection;
 
-        public AuthenticationManager(IAuthenticationManagerConfig config)
+        public AuthenticationManager(AuthenticationManagerConfig config)
         {
             MongoClient dbClient = new MongoClient(config.ConnectionString);
             IMongoDatabase userDatabase = dbClient.GetDatabase(config.DatabaseName);

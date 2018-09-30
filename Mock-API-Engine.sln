@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{96C57144-049B-4F9F-9CEF-F0A7EE5FFF0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web", "web\web.csproj", "{81BCD23D-04F7-4234-AD14-6C1649E730D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{96C57144-049B-4F9F-9CEF-F0A7EE5FFF0B}.Release|x64.Build.0 = Release|Any CPU
 		{96C57144-049B-4F9F-9CEF-F0A7EE5FFF0B}.Release|x86.ActiveCfg = Release|Any CPU
 		{96C57144-049B-4F9F-9CEF-F0A7EE5FFF0B}.Release|x86.Build.0 = Release|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Debug|x64.Build.0 = Debug|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Debug|x86.Build.0 = Debug|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Release|x64.ActiveCfg = Release|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Release|x64.Build.0 = Release|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Release|x86.ActiveCfg = Release|Any CPU
+		{81BCD23D-04F7-4234-AD14-6C1649E730D0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
