@@ -1,6 +1,6 @@
 using System;
 
-namespace Authentication.Model
+namespace Authentication.Models
 {
     public class Credential
     {

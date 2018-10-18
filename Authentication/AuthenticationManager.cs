@@ -1,6 +1,6 @@
 using System;
 using MongoDB.Driver;
-using Authentication.Model;
+using Authentication.Models;
 using System.Collections.Generic;
 using Crypto;
 using System.Text;
@@ -10,13 +10,14 @@ namespace Authentication
     public interface IAuthenticationManager
     {
         User GetUserDetails(string authCode);
-        bool Validate(string authCode);
+        bool Validate(string userName, string authCode);
     }
 
     public class AuthenticationManagerConfig
     {
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
+        public string TableName { get; set; }
     }
 
     public class AuthenticationManager : IAuthenticationManager
@@ -29,17 +30,21 @@ namespace Authentication
         {
             MongoClient dbClient = new MongoClient(config.ConnectionString);
             IMongoDatabase userDatabase = dbClient.GetDatabase(config.DatabaseName);
-            UserCollection = userDatabase.GetCollection<User>("Users");
+            UserCollection = userDatabase.GetCollection<User>(config.TableName);
         }
 
-        public bool Validate(string authCode)
+        public bool Validate(string userName, string authCode)
         {
             try
             {
                 Credential userEnteredCredential = GetDecodedCredential(authCode, UserAuthCodeEncryptionLevel);
-                User currentUser = (User)UserCollection.Find(User => User.UserName.Equals(userEnteredCredential.UserName));
+                User currentUser = (User)UserCollection.Find(User => User.UserName.Equals(userName));
                 Credential credentialFromDb = GetDecodedCredential(currentUser.AuthCode, AuthCodeDbEncryptionLevel);
-                return userEnteredCredential.UserName.Equals(credentialFromDb.UserName, StringComparison.OrdinalIgnoreCase) && userEnteredCredential.Password.Equals(credentialFromDb.Password);
+                return (
+                    userEnteredCredential.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase)
+                    && userEnteredCredential.UserName.Equals(credentialFromDb.UserName, StringComparison.OrdinalIgnoreCase)
+                    && userEnteredCredential.Password.Equals(credentialFromDb.Password)
+                    );
             }
             catch
             {
