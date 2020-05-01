@@ -1,8 +1,7 @@
 ﻿
 using System;
-using Authentication;
-using Authentication.Models;
-using Core.Models;
+using UserManagement;
+using UserManagement.Models;
 
 namespace Core
 {
@@ -10,43 +9,29 @@ namespace Core
     {
         public string DBConnectionString { get; set; }
         public string DatabaseName { get; set; }
-        public string UserTableName { get; set; }
-        public string CoreTableName { get; set; }
     }
 
-    interface IApp
+    public interface IApp
     {
+        IUserManager GetUserManager();
     }
 
     public class App : IApp
     {
-        private AuthenticationManager AuthManager { get; set; }
+        private IUserManager UserManager { get; set; }
 
         public App(AppConfig config)
         {
-            AuthManager = new AuthenticationManager(new AuthenticationManagerConfig()
+            UserManager = new UserManager(new UserManagerConfig()
             {
                 ConnectionString = config.DBConnectionString,
-                DatabaseName = config.DatabaseName,
-                TableName = config.UserTableName
+                DatabaseName = config.DatabaseName
             });
         }
 
-        public bool ValidateUser(string userName, string authCode)
+        public IUserManager GetUserManager()
         {
-            return AuthManager.Validate(userName, authCode);
-        }
-
-        public UserDetails GetUserDetails(string authCode)
-        {
-            User userDetails = AuthManager.GetUserDetails(authCode);
-            return new UserDetails
-            {
-                FullName = userDetails.FullName,
-                UserName = userDetails.UserName,
-                AccountType = userDetails.AccountType,
-                DOB = userDetails.DOB
-            };
+            return UserManager;
         }
     }
 }

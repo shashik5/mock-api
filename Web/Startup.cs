@@ -24,7 +24,7 @@ namespace Web
             IConfigurationBuilder configBuilder = new ConfigurationBuilder()
             .SetBasePath(env.ContentRootPath)
             .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
             configBuilder.AddEnvironmentVariables();
             Configuration = configBuilder.Build();
 
@@ -32,9 +32,7 @@ namespace Web
 
             GlobalApplicationData.SetGlobalData(GlobalDataKey.Core, new App(new AppConfig
             {
-                CoreTableName = appConfig.GetValue<string>("CoreTableName"),
                 DBConnectionString = appConfig.GetValue<string>("ConnectionString"),
-                UserTableName = appConfig.GetValue<string>("UserTableName"),
                 DatabaseName = appConfig.GetValue<string>("DatabaseName")
             }));
         }
