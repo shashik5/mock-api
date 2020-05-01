@@ -12,17 +12,18 @@ namespace Crypto
         /// <summary>
         /// Encryption level.
         /// </summary>
-        private static int EncryptionLevel = 2;
+        private const uint EncryptionLevel = 1;
 
         /// <summary>
         /// Method to encrypt string.
         /// </summary>
         /// <param name="stringToEncode">String to encrypt.</param>
+        /// <param name="encryptionLevel">A positive integer which is used to encode the string, default value is 1.</param>
         /// <returns>Encrypted string.</returns>
-        public static string Encode(string stringToEncode)
+        public static string Encode(string stringToEncode, uint encryptionLevel = EncryptionLevel)
         {
             string encodedString = stringToEncode;
-            for (int i = 0; i < EncryptionLevel; i++)
+            for (int i = 0; i < encryptionLevel; i++)
             {
                 encodedString = _Encode(encodedString);
             }
@@ -33,14 +34,11 @@ namespace Crypto
         /// Method to decrypt string
         /// </summary>
         /// <param name="stringToDecode">String to decrypt.</param>
+        /// <param name="encryptionLevel">A positive integer which is used to decode the string, default value is 1.</param>
         /// <returns>Decrypted string.</returns>
-        public static string Decode(string stringToDecode, [Optional]int encryptionLevel)
+        public static string Decode(string stringToDecode, uint encryptionLevel = EncryptionLevel)
         {
             string decodedString = stringToDecode;
-            if (encryptionLevel <= 0)
-            {
-                encryptionLevel = EncryptionLevel;
-            }
             for (int i = 0; i < encryptionLevel; i++)
             {
                 decodedString = _Decode(decodedString);
